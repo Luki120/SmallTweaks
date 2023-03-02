@@ -1,0 +1,11 @@
+Package: me.luki.hello
+Name: Hello
+Version: 0.9.2
+Architecture: iphoneos-arm
+Description: Yet again another awesome MobileSubstrate tweak
+Maintainer: Luki
+Author: Luki
+Section: Tweaks
+Depends: mobilesubstrate
+Depiction: https://luki120.github.io/depictions/web/?p=me.luki.hello
+SileoDepiction: https://luki120.github.io/depictions/native/me.luki.hello/depiction.json

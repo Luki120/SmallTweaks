@@ -1,0 +1,9 @@
+Package: me.luki.sixbar14
+Name: SixBar14
+Version: 0.9.0
+Architecture: iphoneos-arm
+Description: iOS 6 Status Bar style for iOS 14+
+Maintainer: Luki
+Author: Luki
+Section: Tweaks
+Depends: mobilesubstrate

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>label</key>
+				<string>Threshold</string>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSSliderCell</string>
+				<key>default</key>
+				<real>1</real>
+				<key>defaults</key>
+				<string>me.luki.arresprefs</string>
+				<key>key</key>
+				<string>timeValue</string>
+				<key>min</key>
+				<real>1</real>
+				<key>max</key>
+				<real>5</real>
+				<key>showValue</key>
+				<true />
+				<key>isSegmented</key>
+				<true />
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerAlignment</key>
+				<real>1</real>
+				<key>footerText</key>
+				<string>made by Luki with ❤️</string>
+				<key>isStaticText</key>
+				<true />
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerAlignment</key>
+				<real>1</real>
+				<key>footerText</key>
+				<string>© 2021-2023 Luki120</string>
+				<key>isStaticText</key>
+				<true />
+			</dict>
+		</array>
+		<key>title</key>
+		<string>Arres</string>
+	</dict>
+</plist>

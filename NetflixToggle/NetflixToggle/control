@@ -1,0 +1,9 @@
+Package: me.luki.netflixtoggle
+Name: NetflixToggle
+Depends: mobilesubstrate
+Version: 0.9.0
+Architecture: iphoneos-arm
+Description: An awesome Control Center module!
+Maintainer: Luki
+Author: Luki
+Section: Control Center (Modules)

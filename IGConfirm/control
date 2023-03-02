@@ -1,0 +1,11 @@
+Package: me.luki.igconfirm
+Name: IGConfirm
+Version: 0.9.0
+Architecture: iphoneos-arm
+Description: Prevent accidental likes or follows on Instagram
+Maintainer: Luki
+Author: Luki
+Section: Tweaks
+Depends: mobilesubstrate
+Depiction: https://luki120.github.io/depictions/web/?p=me.luki.igconfirm
+SileoDepiction: https://luki120.github.io/depictions/native/me.luki.igconfirm/depiction.json

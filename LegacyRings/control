@@ -1,0 +1,11 @@
+Package: me.luki.legacyrings
+Name: LegacyRings
+Version: 0.9.0
+Architecture: iphoneos-arm
+Description: Bring back the old iOS 9 keypad buttons
+Maintainer: Luki
+Author: Luki
+Section: Tweaks
+Depends: mobilesubstrate, love.litten.libkitten
+Depiction: https://luki120.github.io/depictions/web/?p=me.luki.legacyrings
+SileoDepiction: https://luki120.github.io/depictions/native/me.luki.legacyrings/depiction.json

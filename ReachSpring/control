@@ -1,0 +1,11 @@
+Package: me.luki.reachspring
+Name: ReachSpring
+Version: 0.9.0
+Architecture: iphoneos-arm
+Description: Respring smoothly and with ease invoking the reachability gesture
+Maintainer: Luki
+Author: Luki
+Section: Tweaks
+Depends: mobilesubstrate
+Depiction: https://luki120.github.io/depictions/web/?p=me.luki.reachspring
+SileoDepiction: https://luki120.github.io/depictions/native/me.luki.reachspring/depiction.json

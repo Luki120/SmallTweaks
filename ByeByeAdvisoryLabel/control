@@ -1,0 +1,11 @@
+Package: me.luki.byebyeadvisorylabel
+Name: ByeByeAdvisoryLabel
+Author: Luki
+Description: Removes the annoying parental advisory pop-up in Netflix.
+Depends: mobilesubstrate
+Maintainer: Luki
+Architecture: iphoneos-arm
+Section: Tweaks
+Version: 0.9.0
+Depiction: https://luki120.github.io/depictions/web/?p=me.luki.byebyeadvisorylabel
+SileoDepiction: https://luki120.github.io/depictions/native/me.luki.byebyeadvisorylabel/depiction.json

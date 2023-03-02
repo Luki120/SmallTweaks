@@ -1,0 +1,9 @@
+Package: me.luki.dndtimer
+Name: DNDTimer
+Version: 0.9.0
+Architecture: iphoneos-arm
+Description: Enable DND for custom time periods
+Maintainer: Luki
+Author: Luki
+Section: Tweaks
+Depends: mobilesubstrate

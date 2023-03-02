@@ -1,0 +1,12 @@
+{
+	Filter = {
+		Classes = (
+			"_UIElasticContextMenuBackgroundView",
+			"_UIContextMenuActionsListSeparatorView",
+			"UICollectionReusableView",
+			"MRUNowPlayingContainerView",
+			"MRURoutingTableViewCell",
+			"MRURoutingHeaderView"
+		); 
+	};
+}
