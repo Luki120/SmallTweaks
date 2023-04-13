@@ -7,6 +7,6 @@ Maintainer: Luki
 Author: Luki
 Section: Tweaks
 Depends: mobilesubstrate, preferenceloader, com.mrgcgamer.libgcuniversal
-Icon: https://raw.githubusercontent.com/Luki120/Arizona/main/ArizonaPrefs/Resources/Assets/ArizonaHotIcon.png
+Icon: https://raw.githubusercontent.com/Luki120/SmallTweaks/main/SpringBoard/Arizona/ArizonaPrefs/Resources/Assets/ArizonaHotIcon.png
 Depiction: https://luki120.github.io/depictions/web/?p=me.luki.arizona
 SileoDepiction: https://luki120.github.io/depictions/native/me.luki.arizona/depiction.json
