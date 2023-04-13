@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Maybe</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>ArizonaTintCell</string>
+			<key>action</key>
+			<string>launchDiscord</string>
+			<key>label</key>
+			<string>Chat With Us On Discord</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>ArizonaTintCell</string>
+			<key>action</key>
+			<string>launchPayPal</string>
+			<key>label</key>
+			<string>Support Development</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>ArizonaTintCell</string>
+			<key>action</key>
+			<string>launchGitHub</string>
+			<key>label</key>
+			<string>Source Code 🔥</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>You Might Like</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>ArizonaTintCell</string>
+			<key>action</key>
+			<string>launchApril</string>
+			<key>label</key>
+			<string>April</string>
+			<key>icon</key>
+			<string>Assets/April@2x.png</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>ArizonaTintCell</string>
+			<key>action</key>
+			<string>launchMeredith</string>
+			<key>label</key>
+			<string>Meredith</string>
+			<key>icon</key>
+			<string>Assets/Meredith@2x.png</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>Arizona</string>
+</dict>
+</plist>
