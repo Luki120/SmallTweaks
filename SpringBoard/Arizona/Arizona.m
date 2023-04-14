@@ -1,3 +1,5 @@
+/*--- Move the stock clock, date & lock glyph on the fly ---*/
+
 @import UIKit;
 @import CydiaSubstrate;
 #import "Common/Common.h"
