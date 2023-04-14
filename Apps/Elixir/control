@@ -1,0 +1,12 @@
+Package: me.luki.elixir
+Name: Elixir
+Version: 0.9.2
+Architecture: iphoneos-arm
+Description: Tweak count at a glimpse
+Maintainer: Luki
+Author: Luki
+Section: Tweaks
+Depends: mobilesubstrate
+Icon: https://raw.githubusercontent.com/Luki120/luki120.github.io/master/assets/Elixir/ElixirIcon.png
+Depiction: https://luki120.github.io/depictions/web/?p=me.luki.elixir
+SileoDepiction: https://luki120.github.io/depictions/native/me.luki.elixir/depiction.json
