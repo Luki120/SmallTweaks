@@ -1,3 +1,5 @@
+/*--- Netflix like volume HUD ---*/
+
 @import libhooker.libblackjack;
 #import "View/IslaView.h"
 

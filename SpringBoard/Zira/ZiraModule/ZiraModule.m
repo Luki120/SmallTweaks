@@ -1,3 +1,5 @@
+/*--- Put an image background as a CC module on the fly ---*/
+
 #import "ZiraModule.h"
 
 

@@ -1,3 +1,5 @@
+/*--- Lock your hidden album with TouchID or password, includes a CC module to toggle it on-off on the fly ---*/
+
 @import UIKit;
 @import CydiaSubstrate;
 @import LocalAuthentication;
