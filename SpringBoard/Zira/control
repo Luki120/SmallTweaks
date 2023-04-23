@@ -1,0 +1,9 @@
+Package: me.luki.zira
+Name: Zira
+Version: 0.9.0
+Architecture: iphoneos-arm
+Description: Put an image background as a CC module on the fly
+Maintainer: Luki
+Author: Luki
+Section: Control Center (Modules)
+Depends: com.mrgcgamer.libgcuniversal, com.opa334.ccsupport
