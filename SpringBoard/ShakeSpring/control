@@ -2,8 +2,10 @@ Package: me.luki.shakespring
 Name: ShakeSpring
 Version: 0.9.0
 Architecture: iphoneos-arm
-Description: An awesome MobileSubstrate tweak!
+Description: Shake your device to respring, ez
 Maintainer: Luki
 Author: Luki
 Section: Tweaks
 Depends: mobilesubstrate
+Depiction: https://luki120.github.io/depictions/web/?p=me.luki.shakespring
+SileoDepiction: https://luki120.github.io/depictions/native/me.luki.shakespring/depiction.json
