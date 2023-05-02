@@ -9,6 +9,7 @@
 
 #define kClass(class) NSClassFromString(class)
 #define kIsCurrentApp(string) [[[NSBundle mainBundle] bundleIdentifier] isEqual: string]
+#define kOneSettings dlopen("/Library/MobileSubstrate/DynamicLibraries/OneSettings.dylib", RTLD_LAZY)
 #define kOrion dlopen("/Library/MobileSubstrate/DynamicLibraries/OrionSettings.dylib", RTLD_LAZY)
 #define kShuffle dlopen("/Library/MobileSubstrate/DynamicLibraries/shuffle.dylib", RTLD_LAZY)
 
@@ -21,6 +22,24 @@
 @property (copy, nonatomic) NSString *title;
 @end
 
+
+@interface TweakSpecifiersController : PSListController
+@end
+
+
+static void (*origShuffleVDL)(TweakSpecifiersController *, SEL);
+static void overrideShuffleVDL(TweakSpecifiersController *self, SEL _cmd) {
+
+	origShuffleVDL(self, _cmd);
+
+	// Shuffle has a search bar so no space at the top :woeIsFade:
+	UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
+	[footerView addSubview: [ElixirLabelFactory makeElixirLabel]];
+	[ElixirLabelFactory centerElixirLabelOnBothAxesOfView: footerView];
+
+	self.table.tableFooterView = footerView;
+
+}
 
 static void (*origTweaksVDL)(PSListController *, SEL);
 static void overrideTweaksVDL(PSListController *self, SEL _cmd) {
@@ -58,15 +77,16 @@ static void overrideVDL(PSUIPrefsListController *self, SEL _cmd) {
 
 }
 
-__attribute__((constructor)) static void init() {
+__attribute__((constructor)) static void init(void) {
 
-	if(kOrion != nil)
+	if(kOneSettings != nil)
+		MSHookMessageEx(kClass(@"OSTweaksListController"), @selector(viewDidLoad), (IMP) &overrideTweaksVDL, (IMP *) &origTweaksVDL);
 
+	else if(kOrion != nil)
 		MSHookMessageEx(kClass(@"OrionTweakSpecifiersController"), @selector(viewDidLoad), (IMP) &overrideTweaksVDL, (IMP *) &origTweaksVDL);
 
 	else if(kShuffle != nil)
-
-		MSHookMessageEx(kClass(@"TweakSpecifiersController"), @selector(viewDidLoad), (IMP) &overrideTweaksVDL, (IMP *) &origTweaksVDL);
+		MSHookMessageEx(kClass(@"TweakSpecifiersController"), @selector(viewDidLoad), (IMP) &overrideShuffleVDL, (IMP *) &origShuffleVDL);
 
 	else MSHookMessageEx(kClass(@"PSUIPrefsListController"), @selector(viewDidLoad), (IMP) &overrideVDL, (IMP *) &origVDL);
 
