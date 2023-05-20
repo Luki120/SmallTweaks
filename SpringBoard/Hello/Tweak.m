@@ -7,6 +7,10 @@ credits to ETHN for the font included in his tweak Greeting ---*/
 @import UIKit;
 @import CoreText;
 @import CydiaSubstrate;
+#import <rootless.h>
+
+#define rootlessPathC(cPath) ROOT_PATH(cPath)
+#define rootlessPathNS(path) ROOT_PATH_NS(path)
 
 
 @interface _UIStatusBarStringView : UILabel
@@ -20,7 +24,7 @@ static NSString *timeString = nil;
 static id (*origIWF)(_UIStatusBarStringView *, SEL, CGRect);
 static id overrideIWF(_UIStatusBarStringView *self, SEL _cmd, CGRect frame) { // load font
 
-	NSString *fontPath = @"/Library/Application Support/Hello/IntroScript-Bold.ttf";
+	NSString *fontPath = rootlessPathNS(@"/Library/Application Support/Hello/IntroScript-Bold.ttf");
 
 	NSData *fontData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath: fontPath]];
 	CFErrorRef error;
@@ -79,7 +83,7 @@ static void new_crossDissolveLabel(_UIStatusBarStringView *self, SEL _cmd) {
 
 }
 
-__attribute__((constructor)) static void init() {
+__attribute__((constructor)) static void init(void) {
 
 	MSHookMessageEx(kClass(@"_UIStatusBarStringView"), @selector(initWithFrame:), (IMP) &overrideIWF, (IMP *) &origIWF);
 	MSHookMessageEx(kClass(@"_UIStatusBarStringView"), @selector(setText:), (IMP) &overrideST, (IMP *) &origST);

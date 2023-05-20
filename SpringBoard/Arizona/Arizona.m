@@ -25,7 +25,7 @@ static float coordinatesForY;
 static float lockCoordinatesForX;
 static float lockCoordinatesForY;
 
-static NSString *const kLatchKey = @"/Library/MobileSubstrate/DynamicLibraries/LatchKey.dylib";
+static NSString *const kLatchKey = rootlessPathNS(@"/Library/MobileSubstrate/DynamicLibraries/LatchKey.dylib");
 
 static void loadWithoutAFuckingRespring() {
 
@@ -102,7 +102,7 @@ static void overrideLayoutSubviews(SBUIProudLockIconView *self, SEL _cmd) {
 }
 
 
-__attribute__((constructor)) static void init() {
+__attribute__((constructor)) static void init(void) {
 
 	loadWithoutAFuckingRespring();
 

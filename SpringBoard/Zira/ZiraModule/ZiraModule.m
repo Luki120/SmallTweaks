@@ -3,8 +3,8 @@
 #import "ZiraModule.h"
 
 
-static NSString *const kBSC = @"/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib";
-static NSString *const kPrysm = @"/Library/MobileSubstrate/DynamicLibraries/Prysm.dylib";
+static NSString *const kBSC = rootlessPathNS(@"/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib");
+static NSString *const kPrysm = rootlessPathNS(@"/Library/MobileSubstrate/DynamicLibraries/Prysm.dylib");
 
 
 @implementation ZiraModule {

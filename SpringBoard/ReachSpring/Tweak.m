@@ -4,7 +4,10 @@
 @import CydiaSubstrate;
 @import Foundation;
 #import <spawn.h>
+#import <rootless.h>
 
+#define rootlessPathC(cPath) ROOT_PATH(cPath)
+#define rootlessPathNS(path) ROOT_PATH_NS(path)
 
 @class SBReachabilityManager;
 
@@ -18,11 +21,11 @@ static void overrideUpdateReachabilityModeActive(SBReachabilityManager *self, SE
 
 	pid_t pid;
 	const char *args[] = {"killall", "backboardd", NULL, NULL};
-	posix_spawn(&pid, "usr/bin/killall", NULL, NULL, (char *const *)args, NULL);
+	posix_spawn(&pid, rootlessPathC("usr/bin/killall"), NULL, NULL, (char *const *)args, NULL);
 
 }
 
-__attribute__((constructor)) static void init() {
+__attribute__((constructor)) static void init(void) {
 
 	MSHookMessageEx(NSClassFromString(@"SBReachabilityManager"), @selector(_updateReachabilityModeActive:), (IMP) &overrideUpdateReachabilityModeActive, (IMP *) &origUpdateReachabilityModeActive);
 

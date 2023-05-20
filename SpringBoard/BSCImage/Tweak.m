@@ -5,7 +5,7 @@ dark/light images and of course, changes apply on the fly ---*/
 
 @import UIKit;
 @import CydiaSubstrate;
-@import gcUniversal.imagePickerUtils;
+@import GcUniversal.ImagePickerUtils;
 #import "Common/Common.h"
 
 
@@ -96,7 +96,7 @@ static void overrideVDL(SCContentViewController *self, SEL _cmd) {
 
 }
 
-__attribute__((constructor)) static void init() {
+__attribute__((constructor)) static void init(void) {
 
 	MSHookMessageEx(kClass(@"SCContentViewController"), @selector(viewDidLoad), (IMP) &overrideVDL, (IMP *) &origVDL);
 	MSHookMessageEx(kClass(@"SCContentViewController"), @selector(traitCollectionDidChange:), (IMP) &overrideTCDC, (IMP *) &origTCDC);

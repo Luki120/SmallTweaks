@@ -64,7 +64,7 @@ static void overrideDMTS(MTMaterialView *self, SEL _cmd) {
 
 }
 
-__attribute__((constructor)) static void init() {
+__attribute__((constructor)) static void init(void) {
 
 	MSHookMessageEx(NSClassFromString(@"MTMaterialView"), @selector(setWeighting:), (IMP) &overrideSetWeighting, (IMP *) &origSetWeighting);
 	MSHookMessageEx(NSClassFromString(@"MTMaterialView"), @selector(didMoveToSuperview), (IMP) &overrideDMTS, (IMP *) &origDMTS);

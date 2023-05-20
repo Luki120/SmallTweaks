@@ -4,14 +4,15 @@
 @import Preferences.PSSpecifier;
 @import Preferences.PSListController;
 #import <dlfcn.h>
+#import "Common/Common.h"
 #import "Factory/ElixirLabelFactory.h"
 
 
 #define kClass(class) NSClassFromString(class)
 #define kIsCurrentApp(string) [[[NSBundle mainBundle] bundleIdentifier] isEqual: string]
-#define kOneSettings dlopen("/Library/MobileSubstrate/DynamicLibraries/OneSettings.dylib", RTLD_LAZY)
-#define kOrion dlopen("/Library/MobileSubstrate/DynamicLibraries/OrionSettings.dylib", RTLD_LAZY)
-#define kShuffle dlopen("/Library/MobileSubstrate/DynamicLibraries/shuffle.dylib", RTLD_LAZY)
+#define kOneSettings dlopen(rootlessPathC("/Library/MobileSubstrate/DynamicLibraries/OneSettings.dylib"), RTLD_LAZY)
+#define kOrion dlopen(rootlessPathC("/Library/MobileSubstrate/DynamicLibraries/OrionSettings.dylib"), RTLD_LAZY)
+#define kShuffle dlopen(rootlessPathC("/Library/MobileSubstrate/DynamicLibraries/shuffle.dylib"), RTLD_LAZY)
 
 
 @interface PSUIPrefsListController : PSListController

@@ -7,8 +7,8 @@
 
 extern CFArrayRef CPBitmapCreateImagesFromData(CFDataRef cpbitmap, void *, int, void *);
 
-static NSString *const kWallPath = @"/var/mobile/Library/SpringBoard/LockBackground.cpbitmap";
-static NSString *const kDarkWallPath = @"/var/mobile/Library/SpringBoard/LockBackgrounddark.cpbitmap";
+static NSString *const kWallPath = rootlessPathNS(@"/var/mobile/Library/SpringBoard/LockBackground.cpbitmap");
+static NSString *const kDarkWallPath = rootlessPathNS(@"/var/mobile/Library/SpringBoard/LockBackgrounddark.cpbitmap");
 
 static BOOL yes;
 static NSInteger wallType;
@@ -120,7 +120,7 @@ static void overrideVDL(CSCoverSheetViewController *self, SEL _cmd) {
 
 }
 
-__attribute__((constructor)) static void init() {
+__attribute__((constructor)) static void init(void) {
 
 	MSHookMessageEx(kClass(@"CSCoverSheetViewController"), @selector(viewDidLoad), (IMP) &overrideVDL, (IMP *) &origVDL);
 

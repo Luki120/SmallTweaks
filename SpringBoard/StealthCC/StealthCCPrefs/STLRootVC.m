@@ -50,7 +50,7 @@
 
 - (void)launchSourceCode {
 
-	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://github.com/Luki120/SmallTweaks/tree/main/StealthCC"] options:@{} completionHandler:nil];
+	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://github.com/Luki120/SmallTweaks/tree/main/SpringBoard/StealthCC"] options:@{} completionHandler:nil];
 
 }
 
