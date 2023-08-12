@@ -68,6 +68,16 @@
 				<key>footerAlignment</key>
 				<real>1</real>
 				<key>footerText</key>
+				<string>Handcrafted icon by @CycloneTM_</string>
+				<key>isStaticText</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerAlignment</key>
+				<real>1</real>
+				<key>footerText</key>
 				<string>made by Luki for Stealth with ❤️</string>
 				<key>isStaticText</key>
 				<true/>
