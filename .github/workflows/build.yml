@@ -1,0 +1,60 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Checkout theos/theos
+        uses: actions/checkout@main
+        with:
+          repository: theos/theos
+          ref: master
+          submodules: recursive
+          path: theos
+
+      - name: Checkout theos/sdks
+        uses: actions/checkout@main
+        with:
+          repository: theos/sdks
+          ref: master
+          sparse-checkout: iPhoneOS14.5.sdk
+          path: theos/sdks
+
+      - name: Checkout LibGcUniversalDocumentation/master
+        uses: actions/checkout@main
+        with:
+          repository: MrGcGamer/LibGcUniversalDocumentation
+          path: LibGcUniversalDocumentation
+
+      - name: Checkout libKitten/main
+        uses: actions/checkout@main
+        with:
+          repository: Luki120/libKitten
+          path: libKitten
+
+      - name: Setup libs & build package
+        run: |
+          cd LibGcUniversalDocumentation
+          THEOS=../theos ./install.sh
+          cp GcUniversal/module.modulemap "../theos/include/GcUniversal/"
+          cd ..
+          cd libKitten
+          THEOS=../theos ./install.sh
+          brew install make xz ldid
+          export THEOS="$(pwd)/theos"
+          for PROJECT in Apps/* Springboard/* ; do
+              gmake -C "${PROJECT}" clean package TARGET="iphone:clang:14.5:14.0" FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+          done
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: */*/packages/*.deb
