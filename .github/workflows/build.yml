@@ -48,6 +48,7 @@ jobs:
           cd ..
           cd libKitten
           THEOS=../theos ./install.sh
+          cd ..
           brew install make xz ldid
           export THEOS="$(pwd)/theos"
           for PROJECT in Apps/* Springboard/* ; do
@@ -57,4 +58,4 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
         with:
-          path: */*/packages/*.deb
+          path: /**/*.deb
