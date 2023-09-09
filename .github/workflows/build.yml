@@ -58,4 +58,4 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
         with:
-          path: */**/packages/*.deb
+          path: **/packages/*.deb
