@@ -44,7 +44,6 @@ jobs:
         run: |
           cd LibGcUniversalDocumentation
           THEOS=../theos ./install.sh
-          cp GcUniversal/module.modulemap "../theos/include/GcUniversal/"
           cd ..
           cd libKitten
           THEOS=../theos ./install.sh
@@ -52,7 +51,7 @@ jobs:
           brew install make xz ldid
           export THEOS="$(pwd)/theos"
           for PROJECT in Apps/* Springboard/* ; do
-              gmake -C "${PROJECT}" clean package TARGET="iphone:clang:14.5:14.0" FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+              gmake -C "${PROJECT}" clean package TARGET="iphone:clang:14.5:14.0" FINALPACKAGE=1 THEOS_PACKAGE_DIR_NAME="../../packages" THEOS_PACKAGE_SCHEME=rootless
           done
 
       - name: Upload a Build Artifact
