@@ -48,9 +48,9 @@ jobs:
           cd libKitten
           THEOS=../theos ./install.sh
           cd ..
-          brew install make xz ldid
+          brew install make ldid
           export THEOS="$(pwd)/theos"
-          for PROJECT in Apps/* Springboard/* ; do
+          for PROJECT in Apps/Kaia/ SpringBoard/* ; do
               gmake -C "${PROJECT}" clean package TARGET="iphone:clang:14.5:14.0" FINALPACKAGE=1 THEOS_PACKAGE_DIR_NAME="../../packages" THEOS_PACKAGE_SCHEME=rootless
           done
 
