@@ -19,7 +19,7 @@ static void (*origAppDidEnterBackground)(PXNavigationListGadget *, SEL, id);
 static void overrideAppDidEnterBackground(PXNavigationListGadget *self, SEL _cmd, id background) {
 
 	[self.navigationController popToRootViewControllerAnimated: YES];
-	origVDL(self, _cmd, background);
+	origAppDidEnterBackground(self, _cmd, background);
 
 }
 
