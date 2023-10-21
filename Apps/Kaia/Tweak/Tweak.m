@@ -6,10 +6,22 @@
 #import "Headers/Common.h"
 
 
+@interface PXGadgetUIViewController : UIViewController
+@end
+
+
 @interface PXNavigationListGadget : UIViewController
 @end
 
 static BOOL isKaiaToggleSelected;
+
+static void (*origAppDidEnterBackground)(PXNavigationListGadget *, SEL, id);
+static void overrideAppDidEnterBackground(PXNavigationListGadget *self, SEL _cmd, id background) {
+
+	[self.navigationController popToRootViewControllerAnimated: YES];
+	origVDL(self, _cmd, background);
+
+}
 
 static void (*origVDL)(PXNavigationListGadget *, SEL);
 static void overrideVDL(PXNavigationListGadget *self, SEL _cmd) {
@@ -53,6 +65,7 @@ __attribute__((constructor)) static void init() {
 
 	MSHookMessageEx(NSClassFromString(@"PXNavigationListGadget"), @selector(viewDidLoad), (IMP) &overrideVDL, (IMP *) &origVDL);
 	MSHookMessageEx(NSClassFromString(@"PXNavigationListGadget"), @selector(tableView:didSelectRowAtIndexPath:), (IMP) &overrideDidSelectRowAtIndexPath, (IMP *) &origDidSelectRowAtIndexPath);
+	MSHookMessageEx(NSClassFromString(@"PXGadgetUIViewController"), @selector(_applicationDidEnterBackground:), (IMP) &overrideAppDidEnterBackground, (IMP *) &origAppDidEnterBackground);
 
 	class_addMethod(
 		NSClassFromString(@"PXNavigationListGadget"),
