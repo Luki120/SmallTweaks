@@ -87,7 +87,7 @@ __attribute__((constructor)) static void init(void) {
 		MSHookMessageEx(kClass(@"OrionTweakSpecifiersController"), @selector(viewDidLoad), (IMP) &overrideTweaksVDL, (IMP *) &origTweaksVDL);
 
 	else if(kShuffle != nil)
-		MSHookMessageEx(kClass(@"TweakSpecifiersController"), @selector(viewDidLoad), (IMP) &overrideShuffleVDL, (IMP *) &origShuffleVDL);
+		MSHookMessageEx(kClass(@"TweakPreferencesListController"), @selector(viewDidLoad), (IMP) &overrideShuffleVDL, (IMP *) &origShuffleVDL);
 
 	else MSHookMessageEx(kClass(@"PSUIPrefsListController"), @selector(viewDidLoad), (IMP) &overrideVDL, (IMP *) &origVDL);
 
