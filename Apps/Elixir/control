@@ -1,6 +1,6 @@
 Package: me.luki.elixir
 Name: Elixir
-Version: 0.9.4
+Version: 0.9.6
 Architecture: iphoneos-arm
 Description: Tweak count at a glimpse
 Maintainer: Luki
