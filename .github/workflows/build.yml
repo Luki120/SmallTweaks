@@ -25,7 +25,7 @@ jobs:
         with:
           repository: theos/sdks
           ref: master
-          sparse-checkout: iPhoneOS14.5.sdk
+          sparse-checkout: iPhoneOS16.5.sdk
           path: theos/sdks
 
       - name: Checkout LibGcUniversalDocumentation/master
@@ -50,8 +50,8 @@ jobs:
           cd ..
           brew install make ldid
           export THEOS="$(pwd)/theos"
-          for PROJECT in Apps/Elixir/ Apps/Kaia/ SpringBoard/* ; do
-              gmake -C "${PROJECT}" clean package TARGET="iphone:clang:14.5:14.0" FINALPACKAGE=1 THEOS_PACKAGE_DIR_NAME="../../packages" THEOS_PACKAGE_SCHEME=rootless
+          for PROJECT in Apps/Elixir/ Apps/Kaia/ Apps/Zaire/ SpringBoard/* ; do
+              gmake -C "${PROJECT}" clean package TARGET="iphone:clang:16.5:14.0" FINALPACKAGE=1 THEOS_PACKAGE_DIR_NAME="../../packages" THEOS_PACKAGE_SCHEME=rootless
           done
 
       - name: Upload a Build Artifact
