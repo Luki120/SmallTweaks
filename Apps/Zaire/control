@@ -7,3 +7,5 @@ Maintainer: Luki
 Author: Luki
 Section: Tweaks
 Depends: mobilesubstrate
+Depiction: https://luki120.github.io/depictions/web/?p=me.luki.zaire
+SileoDepiction: https://luki120.github.io/depictions/native/me.luki.zaire/depiction.json
