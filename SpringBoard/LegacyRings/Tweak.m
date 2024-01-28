@@ -5,8 +5,6 @@
 @import CydiaSubstrate;
 #import <rootless.h>
 
-
-#define rootlessPathC(cPath) ROOT_PATH(cPath)
 #define rootlessPathNS(path) ROOT_PATH_NS(path)
 
 extern CFArrayRef CPBitmapCreateImagesFromData(CFDataRef cpbitmap, void *, int, void *);
@@ -25,7 +23,7 @@ static void overrideDMTW(TPNumberPadButton *self, SEL _cmd) {
 	self.circleView.alpha = 0;
 	self.circleView.backgroundColor = UIColor.clearColor;
 
-	NSData *lsWallpaperData = [NSData dataWithContentsOfFile:rootlessPathNS(@"/var/mobile/Library/SpringBoard/LockBackground.cpbitmap")];
+	NSData *lsWallpaperData = [NSData dataWithContentsOfFile:@"/var/mobile/Library/SpringBoard/LockBackground.cpbitmap"];
 	CFDataRef lsWallpaperDataRef = (__bridge CFDataRef)lsWallpaperData;
 	CFArrayRef imageArray = CPBitmapCreateImagesFromData(lsWallpaperDataRef, NULL, 1, NULL);
 	UIImage *wallpaperImage = [UIImage imageWithCGImage:(CGImageRef)CFArrayGetValueAtIndex(imageArray, 0)];

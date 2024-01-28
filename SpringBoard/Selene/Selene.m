@@ -7,8 +7,8 @@
 
 extern CFArrayRef CPBitmapCreateImagesFromData(CFDataRef cpbitmap, void *, int, void *);
 
-static NSString *const kWallPath = rootlessPathNS(@"/var/mobile/Library/SpringBoard/LockBackground.cpbitmap");
-static NSString *const kDarkWallPath = rootlessPathNS(@"/var/mobile/Library/SpringBoard/LockBackgrounddark.cpbitmap");
+static NSString *const kWallPath = @"/var/mobile/Library/SpringBoard/LockBackground.cpbitmap";
+static NSString *const kDarkWallPath = @"/var/mobile/Library/SpringBoard/LockBackgrounddark.cpbitmap";
 
 static BOOL yes;
 static NSInteger wallType;
