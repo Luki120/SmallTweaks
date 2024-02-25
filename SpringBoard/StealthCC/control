@@ -7,6 +7,6 @@ Maintainer: Luki
 Author: Luki
 Section: Tweaks
 Depends: mobilesubstrate, preferenceloader
+Icon: https://raw.githubusercontent.com/Luki120/luki120.github.io/master/assets/Tweaks/SpringBoard/StealthCC/StealthCC.png
 Depiction: https://luki120.github.io/depictions/web/?p=me.luki.stealthcc
 SileoDepiction: https://luki120.github.io/depictions/native/me.luki.stealthcc/depiction.json
-Icon: https://raw.githubusercontent.com/Luki120/luki120.github.io/master/assets/Misc/StealthCC.png
