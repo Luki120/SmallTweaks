@@ -57,7 +57,7 @@ static const char *bsc_image_changed = "me.luki.bscimageprefs/bscImageChanged";
 
 - (void)launchSourceCode {
 
-	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://github.com/Luki120/SmallTweaks/tree/main/BSCImage"] options:@{} completionHandler:nil];
+	[UIApplication.sharedApplication openURL:[NSURL URLWithString: @"https://github.com/Luki120/SmallTweaks/tree/main/SpringBoard/BSCImage"] options:@{} completionHandler:nil];
 
 }
 

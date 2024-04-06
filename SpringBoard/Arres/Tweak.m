@@ -13,12 +13,10 @@ custom amount of seconds to prevent accidental touches ---*/
 
 static float timeValue;
 
-static void loadPrefs() {
+static void loadPrefs(void) {
 
-	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: kPath];
-	NSMutableDictionary *prefs = dict ? [dict mutableCopy] : [NSMutableDictionary dictionary];
-
-	timeValue = prefs[@"timeValue"] ? [prefs[@"timeValue"] floatValue] : 1.0f;
+	NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName: kSuiteName];
+	timeValue = [prefs objectForKey:@"timeValue"] ? [prefs floatForKey:@"timeValue"] : 1.0f;
 
 }
 
@@ -52,7 +50,7 @@ static void overrideSF(BNContentViewControllerView *self, SEL _cmd, CGRect frame
 
 }
 
-__attribute__((constructor)) static void init() {
+__attribute__((constructor)) static void init(void) {
 
 	MSHookMessageEx(NSClassFromString(@"BNContentViewControllerView"), @selector(layoutSubviews), (IMP) &overrideLS, (IMP *) &origLS);
 	MSHookMessageEx(NSClassFromString(@"BNContentViewControllerView"), @selector(setFrame:), (IMP) &overrideSF, (IMP *) &origSF);

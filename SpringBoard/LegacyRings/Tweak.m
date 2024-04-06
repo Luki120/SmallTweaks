@@ -5,8 +5,6 @@
 @import CydiaSubstrate;
 #import <rootless.h>
 
-#define rootlessPathNS(path) ROOT_PATH_NS(path)
-
 extern CFArrayRef CPBitmapCreateImagesFromData(CFDataRef cpbitmap, void *, int, void *);
 
 

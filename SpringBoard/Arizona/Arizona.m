@@ -25,7 +25,7 @@ static float coordinatesForY;
 static float lockCoordinatesForX;
 static float lockCoordinatesForY;
 
-static NSString *const kLatchKey = rootlessPathNS(@"/Library/MobileSubstrate/DynamicLibraries/LatchKey.dylib");
+#define kLatchKey jbRootPath(@"/Library/MobileSubstrate/DynamicLibraries/LatchKey.dylib")
 
 static void loadWithoutAFuckingRespring() {
 

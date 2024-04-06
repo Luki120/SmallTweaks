@@ -18,7 +18,7 @@
 
 - (void)setupTweakCount {
 
-	NSString *bundlePath = rootlessPathNS(@"/Library/PreferenceLoader/Preferences/");
+	NSString *bundlePath = jbRootPath(@"/Library/PreferenceLoader/Preferences/");
 	NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:bundlePath error:nil];
 	self.elixirTweakCount = [directoryContent count];
 

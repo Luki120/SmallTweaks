@@ -25,25 +25,14 @@
 }
 
 
-- (id)readPreferenceValue:(PSSpecifier *)specifier {
-
-	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile: kPlistPath]];
-	return settings[specifier.properties[@"key"]] ?: specifier.properties[@"default"];
-
-}
-
-
 - (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier {
 
-	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile: kPlistPath]];
-	[settings setObject:value forKey:specifier.properties[@"key"]];
-	[settings writeToFile:kPlistPath atomically:YES];
-
-	[NSDistributedNotificationCenter.defaultCenter postNotificationName:SeleneDidCreateTapGestureNotification object:nil];
+	NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName: kSuiteName];
+	[prefs setObject:value forKey:specifier.properties[@"key"]];	
 
 	[super setPreferenceValue:value specifier:specifier];
+
+	[NSDistributedNotificationCenter.defaultCenter postNotificationName:SeleneDidCreateTapGestureNotification object:nil];
 
 }
 
@@ -62,7 +51,7 @@ static void selene_setTitle(PSTableCell *self, SEL _cmd, NSString *title) {
 
 }
 
-static void registerSeleneTintCellClass() {
+static void registerSeleneTintCellClass(void) {
 
 	Class SeleneTintCellClass = objc_allocateClassPair([PSTableCell class], "SeleneTintCell", 0);
 	Method method = class_getInstanceMethod([PSTableCell class], @selector(setTitle:));

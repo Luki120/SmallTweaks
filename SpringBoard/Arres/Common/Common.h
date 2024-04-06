@@ -1,9 +1,8 @@
 #import <rootless.h>
 
-#define rootlessPathC(cPath) ROOT_PATH(cPath)
-#define rootlessPathNS(path) ROOT_PATH_NS(path)
+#define jbRootPath(path) ROOT_PATH_NS(path)
 
-static NSString *const kPath = rootlessPathNS(@"/var/mobile/Library/Preferences/me.luki.arresprefs.plist");
+static NSString *const kSuiteName = @"me.luki.arresprefs";
 
 static NSNotificationName const ArresNotificationArrivedNotification = @"ArresNotificationArrivedNotification";
 

@@ -9,8 +9,7 @@ credits to ETHN for the font included in his tweak Greeting ---*/
 @import CydiaSubstrate;
 #import <rootless.h>
 
-#define rootlessPathC(cPath) ROOT_PATH(cPath)
-#define rootlessPathNS(path) ROOT_PATH_NS(path)
+#define jbRootPath(path) ROOT_PATH_NS(path)
 
 
 @interface _UIStatusBarStringView : UILabel
@@ -24,7 +23,7 @@ static NSString *timeString = nil;
 static id (*origIWF)(_UIStatusBarStringView *, SEL, CGRect);
 static id overrideIWF(_UIStatusBarStringView *self, SEL _cmd, CGRect frame) { // load font
 
-	NSString *fontPath = rootlessPathNS(@"/Library/Application Support/Hello/IntroScript-Bold.ttf");
+	NSString *fontPath = jbRootPath(@"/Library/Tweak Support/Hello/IntroScript-Bold.ttf");
 
 	NSData *fontData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath: fontPath]];
 	CFErrorRef error;

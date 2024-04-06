@@ -5,28 +5,24 @@
 @import Foundation;
 #import <spawn.h>
 #import <rootless.h>
-
-#define rootlessPathC(cPath) ROOT_PATH(cPath)
-#define rootlessPathNS(path) ROOT_PATH_NS(path)
+#import <FrontBoardServices/FBSSystemService.h>
+#import <SpringBoardServices/SBSRelaunchAction.h>
 
 @class SBReachabilityManager;
 
-static void (*origUpdateReachabilityModeActive)(SBReachabilityManager *, SEL, BOOL);
 static void overrideUpdateReachabilityModeActive(SBReachabilityManager *self, SEL _cmd, BOOL active) {
 
-	origUpdateReachabilityModeActive(self, _cmd, active);
 	if(!active) return;
 
 	AudioServicesPlaySystemSound(1520);
 
-	pid_t pid;
-	const char *args[] = {"killall", "backboardd", NULL, NULL};
-	posix_spawn(&pid, rootlessPathC("usr/bin/killall"), NULL, NULL, (char *const *)args, NULL);
+    SBSRelaunchAction *restartAction = [SBSRelaunchAction actionWithReason:@"RestartRenderServer" options:SBSRelaunchActionOptionsFadeToBlackTransition targetURL: nil];
+    [[FBSSystemService sharedService] sendActions:[NSSet setWithObject:restartAction] withResult: nil];
 
 }
 
 __attribute__((constructor)) static void init(void) {
 
-	MSHookMessageEx(NSClassFromString(@"SBReachabilityManager"), @selector(_updateReachabilityModeActive:), (IMP) &overrideUpdateReachabilityModeActive, (IMP *) &origUpdateReachabilityModeActive);
+	MSHookMessageEx(NSClassFromString(@"SBReachabilityManager"), @selector(_updateReachabilityModeActive:), (IMP) &overrideUpdateReachabilityModeActive, (IMP *) NULL);
 
 }

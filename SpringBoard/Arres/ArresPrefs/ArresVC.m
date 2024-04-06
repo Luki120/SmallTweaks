@@ -11,21 +11,12 @@
 }
 
 
-- (id)readPreferenceValue:(PSSpecifier *)specifier {
-
-	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile: kPath]];
-	return settings[specifier.properties[@"key"]] ?: specifier.properties[@"default"];
-
-}
-
-
 - (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier {
 
-	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile: kPath]];
-	[settings setObject:value forKey:specifier.properties[@"key"]];
-	[settings writeToFile:kPath atomically:YES];
+	NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName: kSuiteName];
+	[prefs setObject:value forKey:specifier.properties[@"key"]];
+
+	[super setPreferenceValue:value specifier:specifier];
 
 	[NSDistributedNotificationCenter.defaultCenter postNotificationName:ArresNotificationArrivedNotification object:nil];
 

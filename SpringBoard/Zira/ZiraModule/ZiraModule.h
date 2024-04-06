@@ -3,7 +3,7 @@
 #import <ControlCenterUIKit/CCUIToggleModule.h>
 
 #define rootlessPathC(cPath) ROOT_PATH(cPath)
-#define rootlessPathNS(path) ROOT_PATH_NS(path)
+#define jbRootPath(path) ROOT_PATH_NS(path)
 
 
 typedef struct CCUILayoutSize {

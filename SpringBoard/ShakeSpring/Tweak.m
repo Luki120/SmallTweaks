@@ -5,9 +5,7 @@
 #import <spawn.h>
 #import <rootless.h>
 
-#define rootlessPathC(cPath) ROOT_PATH(cPath)
-#define rootlessPathNS(path) ROOT_PATH_NS(path)
-
+#define jbRootPathC(cPath) ROOT_PATH(cPath)
 
 static void (*origMotionEnded)(UIWindow *, SEL, UIEventSubtype, UIEvent *);
 static void overrideMotionEnded(UIWindow *self, SEL _cmd, UIEventSubtype motion, UIEvent *event) {
@@ -17,7 +15,7 @@ static void overrideMotionEnded(UIWindow *self, SEL _cmd, UIEventSubtype motion,
 
 	pid_t pid;
 	const char* args[] = {"killall", "backboardd", NULL};
-	posix_spawn(&pid, rootlessPathC("/usr/bin/killall"), NULL, NULL, (char* const *)args, NULL);
+	posix_spawn(&pid, jbRootPathC("/usr/bin/killall"), NULL, NULL, (char* const *)args, NULL);
 
 }
 

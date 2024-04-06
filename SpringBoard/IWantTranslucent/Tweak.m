@@ -6,12 +6,9 @@ translucent look + hides separators system wide ---*/
 @import CydiaSubstrate;
 
 
-@interface _UIElasticContextMenuBackgroundView : UIView
+@interface UIView ()
+@property (nonatomic, strong) UIVisualEffectView *backgroundView;
 @property (nonatomic, strong) UIVisualEffectView *visualEffectView;
-@end
-
-
-@interface _UIContextMenuActionsListSeparatorView : UIView
 @end
 
 
@@ -35,32 +32,38 @@ translucent look + hides separators system wide ---*/
 
 
 #define kClass(string) NSClassFromString(string)
+#define kOSVersion [[UIDevice currentDevice].systemVersion floatValue]
 
 
 // Translucency
-static void (*origUIElasticContextMenuDMTW)(_UIElasticContextMenuBackgroundView *, SEL);
-static void overrideUIElasticContextMenuDMTW(_UIElasticContextMenuBackgroundView *self, SEL _cmd) {
+static void (*origContextMenuDMTW)(UIView *, SEL);
+static void overrideContextMenuDMTW(UIView *self, SEL _cmd) {
 
-	origUIElasticContextMenuDMTW(self, _cmd);
-	self.visualEffectView.alpha = 0.5;
+	origContextMenuDMTW(self, _cmd);
+	if(kOSVersion >= 15.0) self.backgroundView.alpha = 0.5;
+	else self.visualEffectView.alpha = 0.5;
 
 }
 
 // Hide context menu separators system wide
-static void (*origUIContextMenuActionsListDMTW)(_UIContextMenuActionsListSeparatorView *, SEL);
-static void overrideUIContextMenuActionsListDMTW(_UIContextMenuActionsListSeparatorView *self, SEL _cmd) {
+static void (*origContextMenuSeparatorDMTW)(UIView *, SEL);
+static void overrideContextMenuSeparatorDMTW(UIView *self, SEL _cmd) {
 
-	origUIContextMenuActionsListDMTW(self, _cmd);
+	origContextMenuSeparatorDMTW(self, _cmd);
 	[self removeFromSuperview];
 
 }
 
 // Thick context menu separator
-
 static void (*origUICollectionReusableViewDMTW)(UICollectionReusableView *, SEL);
 static void overrideUICollectionReusableViewDMTW(UICollectionReusableView *self, SEL _cmd) {
 
-	if(![self.reuseIdentifier isEqualToString:@"kContextMenuItemSeparator"]) return origUICollectionReusableViewDMTW(self, _cmd);
+	NSString *reuseIdentifier;
+
+	if(kOSVersion >= 15.0) reuseIdentifier = @"kContextMenuSectionSeparator";
+	else reuseIdentifier = @"kContextMenuItemSeparator";
+
+	if(![self.reuseIdentifier isEqualToString: reuseIdentifier]) return origUICollectionReusableViewDMTW(self, _cmd);
 
 	origUICollectionReusableViewDMTW(self, _cmd);
 	self.hidden = YES;
@@ -71,38 +74,31 @@ static void overrideUICollectionReusableViewDMTW(UICollectionReusableView *self,
 static CGFloat overrideSeparatorHeight(CCUIMenuModuleItemView *self, SEL _cmd) { return 0; }
 
 // CC media player airplay expanded module
-static void (*origMRUContainerDMTW)(MRUNowPlayingContainerView *, SEL);
-static void overrideMRUContainerDMTW(MRUNowPlayingContainerView *self, SEL _cmd) {
+static void (*origDMTW)(MRUNowPlayingContainerView *, SEL);
+static void overrideDMTW(MRUNowPlayingContainerView *self, SEL _cmd) {
 
-	origMRUContainerDMTW(self, _cmd);
+	origDMTW(self, _cmd);
 	[self.separatorView removeFromSuperview];
 
 }
 
-static void (*origMRUTableViewCellDMTW)(MRURoutingTableViewCell *, SEL);
-static void overrideMRUTableViewCellDMTW(MRURoutingTableViewCell *self, SEL _cmd) {
+__attribute__((constructor)) static void init(void) {
 
-	origMRUTableViewCellDMTW(self, _cmd);
-	[self.separatorView removeFromSuperview];
+	if(kOSVersion >= 15.0) {
+		MSHookMessageEx(kClass(@"_UIContextMenuListView"), @selector(didMoveToWindow), (IMP) &overrideContextMenuDMTW, (IMP *) &origContextMenuDMTW);
+		MSHookMessageEx(kClass(@"_UIContextMenuReusableSeparatorView"), @selector(didMoveToWindow), (IMP) &overrideContextMenuSeparatorDMTW, (IMP *) &origContextMenuSeparatorDMTW);
+	}
 
-}
+	else {
+		MSHookMessageEx(kClass(@"_UIElasticContextMenuBackgroundView"), @selector(didMoveToWindow), (IMP) &overrideContextMenuDMTW, (IMP *) &origContextMenuDMTW);
+		MSHookMessageEx(kClass(@"_UIContextMenuActionsListSeparatorView"), @selector(didMoveToWindow), (IMP) &overrideContextMenuSeparatorDMTW, (IMP *) &origContextMenuSeparatorDMTW);
+	}
 
-static void (*origMRUHeaderDMTW)(MRURoutingHeaderView *, SEL);
-static void overrideMRUHeaderDMTW(MRURoutingHeaderView *self, SEL _cmd) {
+	for(NSString *class in @[@"MRUNowPlayingContainerView", @"MRURoutingTableViewCell", @"MRURoutingHeaderView"]) {
+		MSHookMessageEx(kClass(class), @selector(didMoveToWindow), (IMP) &overrideDMTW, (IMP *) &origDMTW);
+	}
 
-	origMRUHeaderDMTW(self, _cmd);
-	[self.separatorView removeFromSuperview];
-
-}
-
-__attribute__((constructor)) static void init() {
-
-	MSHookMessageEx(kClass(@"_UIElasticContextMenuBackgroundView"), @selector(didMoveToWindow), (IMP) &overrideUIElasticContextMenuDMTW, (IMP *) &origUIElasticContextMenuDMTW);
-	MSHookMessageEx(kClass(@"_UIContextMenuActionsListSeparatorView"), @selector(didMoveToWindow), (IMP) &overrideUIContextMenuActionsListDMTW, (IMP *) &origUIContextMenuActionsListDMTW);
 	MSHookMessageEx(kClass(@"CCUIMenuModuleItemView"), @selector(_separatorHeight), (IMP) &overrideSeparatorHeight, (IMP *) NULL);
-	MSHookMessageEx(kClass(@"MRUNowPlayingContainerView"), @selector(didMoveToWindow), (IMP) &overrideMRUContainerDMTW, (IMP *) &origMRUContainerDMTW);
-	MSHookMessageEx(kClass(@"MRURoutingTableViewCell"), @selector(didMoveToWindow), (IMP) &overrideMRUTableViewCellDMTW, (IMP *) &origMRUTableViewCellDMTW);
-	MSHookMessageEx(kClass(@"MRURoutingHeaderView"), @selector(didMoveToWindow), (IMP) &overrideMRUHeaderDMTW, (IMP *) &origMRUHeaderDMTW);
 	MSHookMessageEx(kClass(@"UICollectionReusableView"), @selector(didMoveToWindow), (IMP) &overrideUICollectionReusableViewDMTW, (IMP *) &origUICollectionReusableViewDMTW);
 
 }

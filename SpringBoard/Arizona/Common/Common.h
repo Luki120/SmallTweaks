@@ -1,9 +1,9 @@
 #import <rootless.h>
 
-#define rootlessPathC(cPath) ROOT_PATH(cPath)
-#define rootlessPathNS(path) ROOT_PATH_NS(path)
+#define jbRootPathC(cPath) ROOT_PATH(cPath)
+#define jbRootPath(path) ROOT_PATH_NS(path)
 
-static NSString *const kPath = rootlessPathNS(@"/var/mobile/Library/Preferences/me.luki.arizonaprefs.plist");
+#define kPath jbRootPath(@"/var/mobile/Library/Preferences/me.luki.arizonaprefs.plist")
 
 static NSNotificationName const ArizonaDidUpdateGlyphOriginNotification = @"ArizonaDidUpdateGlyphOriginNotification";
 

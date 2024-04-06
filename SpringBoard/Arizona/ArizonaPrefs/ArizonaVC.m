@@ -74,8 +74,8 @@
 - (void)setupUI {
 
 	UIImage *changelogButtonImage = [UIImage systemImageNamed:@"atom"];
-	UIImage *iconImage = [UIImage imageWithContentsOfFile:rootlessPathNS(@"/Library/PreferenceBundles/ArizonaPrefs.bundle/Assets/Arizona@2x.png")];
-	UIImage *bannerImage = [UIImage imageWithContentsOfFile:rootlessPathNS(@"/Library/PreferenceBundles/ArizonaPrefs.bundle/Assets/ArizonaBanner.png")];
+	UIImage *iconImage = [UIImage imageWithContentsOfFile:jbRootPath(@"/Library/PreferenceBundles/ArizonaPrefs.bundle/Assets/Arizona@2x.png")];
+	UIImage *bannerImage = [UIImage imageWithContentsOfFile:jbRootPath(@"/Library/PreferenceBundles/ArizonaPrefs.bundle/Assets/ArizonaBanner.png")];
 
 	self.navigationItem.titleView = [UIView new];
 
@@ -165,7 +165,7 @@
 
 	AudioServicesPlaySystemSound(1521);
 
-	UIImage *tweakIconImage = [UIImage imageWithContentsOfFile:rootlessPathNS(@"/Library/PreferenceBundles/ArizonaPrefs.bundle/Assets/ArizonaHotIcon.png")];
+	UIImage *tweakIconImage = [UIImage imageWithContentsOfFile:jbRootPath(@"/Library/PreferenceBundles/ArizonaPrefs.bundle/Assets/ArizonaHotIcon.png")];
 	UIImage *checkmarkImage = [UIImage systemImageNamed:@"checkmark.circle.fill"];
 
 	if(changelogController) { [self presentViewController:changelogController animated:YES completion:nil]; return; }
@@ -229,7 +229,7 @@
 
 	pid_t pid;
 	const char* args[] = {"killall", "backboardd", NULL};
-	posix_spawn(&pid, rootlessPathC("/usr/bin/killall"), NULL, NULL, (char* const*)args, NULL);
+	posix_spawn(&pid, jbRootPathC("/usr/bin/killall"), NULL, NULL, (char* const*)args, NULL);
 
 }
 
@@ -369,7 +369,7 @@ static void arizona_setTitle(PSTableCell *self, SEL _cmd, NSString *title) {
 
 }
 
-static void registerArizonaTintCellClass() {
+static void registerArizonaTintCellClass(void) {
 
 	Class ArizonaTintCellClass = objc_allocateClassPair([PSTableCell class], "ArizonaTintCell", 0);
 	Method method = class_getInstanceMethod([PSTableCell class], @selector(setTitle:));

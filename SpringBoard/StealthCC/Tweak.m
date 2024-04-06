@@ -18,19 +18,18 @@ static CGFloat alpha;
 @end
 
 
-static void loadP() {
+static void loadShit(void) {
 
-	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: kPath];
-	NSMutableDictionary *prefs = dict ? [dict mutableCopy] : [NSMutableDictionary dictionary];
+	NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName: kSuiteName];
 
-	magicValue = prefs[@"magicValue"] ? [prefs[@"magicValue"] boolValue] : NO;
-	alpha = prefs[@"alpha"] ? [prefs[@"alpha"] floatValue] : 0.85f;
+	magicValue = [prefs objectForKey: @"magicValue"] ? [prefs boolForKey: @"magicValue"] : NO;
+	alpha = [prefs objectForKey: @"alpha"] ? [prefs floatForKey: @"alpha"] : 0.85f;
 
 }
 
 static void new_unleashTheRabbit(MTMaterialView *self, SEL _cmd) {
 
-	loadP();
+	loadShit();
 	if(!magicValue) return;
 
 	self.weighting = 1;

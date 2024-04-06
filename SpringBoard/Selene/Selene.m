@@ -17,13 +17,12 @@ static UITapGestureRecognizer *tapGestureRecognizer;
 
 #define kClass(string) NSClassFromString(string)
 
-static void loadWithoutAFuckingRespring() {
+static void loadWithoutAFuckingRespring(void) {
 
-	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: kPlistPath];
-	NSMutableDictionary *prefs = dict ? [dict mutableCopy] : [NSMutableDictionary dictionary];
+	NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName: kSuiteName];
 
-	yes = prefs[@"yes"] ? [prefs[@"yes"] boolValue] : NO;
-	wallType = prefs[@"wallType"] ? [prefs[@"wallType"] integerValue] : 0;
+	yes = [prefs objectForKey:@"yes"] ? [prefs boolForKey:@"yes"] : NO;
+	wallType = [prefs objectForKey:@"wallType"] ? [prefs integerForKey:@"wallType"] : 0;
 
 }
 

@@ -3,10 +3,6 @@
 #import "ZiraModule.h"
 
 
-static NSString *const kBSC = rootlessPathNS(@"/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib");
-static NSString *const kPrysm = rootlessPathNS(@"/Library/MobileSubstrate/DynamicLibraries/Prysm.dylib");
-
-
 @implementation ZiraModule {
 
 	ZiraContentModuleVC *ziraContentModuleVC;
@@ -20,6 +16,9 @@ static NSString *const kPrysm = rootlessPathNS(@"/Library/MobileSubstrate/Dynami
 	if(!self) return nil;
 
 	NSFileManager *fileM = [NSFileManager defaultManager];
+	NSString *const kBSC = jbRootPath(@"/Library/MobileSubstrate/DynamicLibraries/BigSurCenter.dylib");
+	NSString *const kPrysm = jbRootPath(@"/Library/MobileSubstrate/DynamicLibraries/Prysm.dylib");
+
 	if([fileM fileExistsAtPath: kBSC] || [fileM fileExistsAtPath: kPrysm]) return nil;
 
 	ziraContentModuleVC = [ZiraContentModuleVC new];

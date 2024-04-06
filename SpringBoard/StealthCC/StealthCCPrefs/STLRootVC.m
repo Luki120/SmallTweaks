@@ -17,6 +17,9 @@
 	self = [super init];
 	if(!self) return nil;
 
+	[UISlider appearanceWhenContainedInInstancesOfClasses:@[[self class]]].minimumTrackTintColor = kSTLCCTintColor;
+	[UISwitch appearanceWhenContainedInInstancesOfClasses:@[[self class]]].onTintColor = kSTLCCTintColor;
+
 	static dispatch_once_t token;
 	dispatch_once(&token, ^{ registerStealthCCTintCellClass(); });	
 
@@ -25,25 +28,14 @@
 }
 
 
-- (id)readPreferenceValue:(PSSpecifier *)specifier {
-
-	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile: kPath]];
-	return settings[specifier.properties[@"key"]] ?: specifier.properties[@"default"];
-
-}
-
-
 - (void)setPreferenceValue:(id)value specifier:(PSSpecifier *)specifier {
 
-	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile: kPath]];
-	[settings setObject:value forKey:specifier.properties[@"key"]];
-	[settings writeToFile:kPath atomically:YES];
-
-	[NSDistributedNotificationCenter.defaultCenter postNotificationName:StealthCCDidApplyCustomBlurNotification object:nil];
+	NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName: kSuiteName];
+	[prefs setObject:value forKey:specifier.properties[@"key"]];
 
 	[super setPreferenceValue:value specifier:specifier];
+
+	[NSDistributedNotificationCenter.defaultCenter postNotificationName:StealthCCDidApplyCustomBlurNotification object:nil];
 
 }
 
@@ -54,7 +46,7 @@
 
 }
 
-static void stealthcc_setTitle(PSTableCell *self, SEL _cmd, NSString *title) {
+static void stealthCC_setTitle(PSTableCell *self, SEL _cmd, NSString *title) {
 
 	struct objc_super superSetTitle = {
 		self,
@@ -69,12 +61,12 @@ static void stealthcc_setTitle(PSTableCell *self, SEL _cmd, NSString *title) {
 
 }
 
-static void registerStealthCCTintCellClass() {
+static void registerStealthCCTintCellClass(void) {
 
 	Class StealthCCTintCellClass = objc_allocateClassPair([PSTableCell class], "STLCCTintCell", 0);
 	Method method = class_getInstanceMethod([PSTableCell class], @selector(setTitle:));
 	const char *typeEncoding = method_getTypeEncoding(method);
-	class_addMethod(StealthCCTintCellClass, @selector(setTitle:), (IMP) stealthcc_setTitle, typeEncoding);
+	class_addMethod(StealthCCTintCellClass, @selector(setTitle:), (IMP) stealthCC_setTitle, typeEncoding);
 
 	objc_registerClassPair(StealthCCTintCellClass);
 

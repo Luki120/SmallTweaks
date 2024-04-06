@@ -18,7 +18,7 @@ static void overrideVDL(PrysmMainPageViewController *self, SEL _cmd) {
 
 }
 
-__attribute__((constructor)) static void init() {
+__attribute__((constructor)) static void init(void) {
 
 	if(![[NSFileManager defaultManager] fileExistsAtPath: kPrysm]) return;
 	MSHookMessageEx(NSClassFromString(@"PrysmMainPageViewController"), @selector(viewDidLoad), (IMP) &overrideVDL, (IMP *) &origVDL);
