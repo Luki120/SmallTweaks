@@ -1,12 +1,17 @@
 {
 	Filter = {
 		Classes = (
+			"_UIContextMenuListView",
+			"_UIContextMenuTitleView",
+			"_UIContextMenuReusableSeparatorView",
 			"_UIElasticContextMenuBackgroundView",
+			"_UIContextMenuActionsListTitleView",
 			"_UIContextMenuActionsListSeparatorView",
 			"UICollectionReusableView",
+			"CCUIMenuModuleItemView",
 			"MRUNowPlayingContainerView",
-			"MRURoutingTableViewCell",
-			"MRURoutingHeaderView"
-		); 
+			"MRURoutingHeaderView",
+			"MRURoutingTableViewCell"
+		);
 	};
 }
