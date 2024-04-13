@@ -8,11 +8,26 @@ on:
     
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@main
 
+      - name: Fetch Theos' latest commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest_commit=$(gh api -H 'Accept: application/vnd.github.sha' \
+          /repos/theos/theos/commits/master); echo "latest_commit=$latest_commit" >> $GITHUB_OUTPUT
+        id: commit
+
+      - uses: actions/cache@v4
+        id: cache-theos
+        with:
+          path: ${{ github.workspace }}/theos
+          key: steps.commit.outputs.latest_commit
+
       - name: Checkout theos/theos
+        if: steps.cache-theos.outputs.cache-hit != 'true'
         uses: actions/checkout@main
         with:
           repository: theos/theos
