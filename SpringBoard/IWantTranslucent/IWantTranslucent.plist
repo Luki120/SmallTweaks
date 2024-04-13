@@ -2,6 +2,7 @@
 	Filter = {
 		Classes = (
 			"_UIContextMenuListView",
+			"_UIContextMenuHeaderView",
 			"_UIContextMenuTitleView",
 			"_UIContextMenuReusableSeparatorView",
 			"_UIElasticContextMenuBackgroundView",
