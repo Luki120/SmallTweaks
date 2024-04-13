@@ -10,6 +10,12 @@ translucent look + hides separators system wide ---*/
 @end
 
 
+@interface _UIContextMenuHeaderView: UIView
+@property (nonatomic, strong) UIVisualEffectView *bgView;
+@property (nonatomic, strong) UIView *separator;
+@end
+
+
 @interface MRUNowPlayingContainerView : UIView
 @property (nonatomic, strong) UIView *separatorView;
 @end
@@ -57,15 +63,26 @@ static void overrideUICollectionReusableViewDMTW(UICollectionReusableView *self,
 
 }
 
-// ! iOS 15, 16+
+// ! iOS 16
 
-static UIVisualEffectView *overrideTitleBackgroundView(UIView *self, SEL _cmd) {
+static void (*origContextMenuHeaderDMTW)(_UIContextMenuHeaderView *, SEL);
+static void overrideContextMenuHeaderDMTW(_UIContextMenuHeaderView *self, SEL _cmd) {
+
+	origContextMenuHeaderDMTW(self, _cmd);
+	self.bgView.hidden = YES;
+	self.separator.hidden = YES;
+
+}
+
+// ! iOS 15
+
+static UIVisualEffectView *overrideTitleBackgroundView(_UIContextMenuTitleView *self, SEL _cmd) {
 
 	return [UIVisualEffectView new];
 
 }
 
-static UIView *overrideTitleSeparator(UIView *self, SEL _cmd) {
+static UIView *overrideTitleSeparator(_UIContextMenuTitleView *self, SEL _cmd) {
 
 	return [UIView new];
 
@@ -107,16 +124,14 @@ static UIView *overrideSeparatorView(UIView *self, SEL _cmd) {
 
 __attribute__((constructor)) static void init(void) {
 
-	if(kOSVersion >= 16.0) {
-		MSHookMessageEx(kClass(@"_UIContextMenuHeaderView"), @selector(bgView), (IMP) &overrideTitleBackgroundView, (IMP *) NULL);
-		MSHookMessageEx(kClass(@"_UIContextMenuHeaderView"), @selector(separator), (IMP) &overrideTitleSeparator, (IMP *) NULL);
-	}
-
-	else if(kOSVersion >= 15.0 && kOSVersion < 16.0) {
+	if(kOSVersion >= 15.0) {
 		MSHookMessageEx(kClass(@"_UIContextMenuListView"), @selector(setBackgroundView:), (IMP) &overrideSetBackgroundView, (IMP *) &origSetBackgroundView);
 		MSHookMessageEx(kClass(@"_UIContextMenuTitleView"), @selector(bgView), (IMP) &overrideTitleBackgroundView, (IMP *) NULL);
 		MSHookMessageEx(kClass(@"_UIContextMenuTitleView"), @selector(separator), (IMP) &overrideTitleSeparator, (IMP *) NULL);
 		MSHookMessageEx(kClass(@"_UIContextMenuReusableSeparatorView"), @selector(didMoveToWindow), (IMP) &overrideContextMenuSeparatorDMTW, (IMP *) &origContextMenuSeparatorDMTW);
+
+		if(kOSVersion >=16.0)
+			MSHookMessageEx(kClass(@"_UIContextMenuHeaderView"), @selector(didMoveToWindow), (IMP) &overrideContextMenuHeaderDMTW, (IMP *) &origContextMenuHeaderDMTW);
 	}
 
 	else {
