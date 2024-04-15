@@ -6,13 +6,12 @@ translucent look + hides separators system wide ---*/
 @import CydiaSubstrate;
 
 
-@interface _UIContextMenuActionsListTitleView: UIView
+@interface _UIContextMenuActionsListTitleView : UIView
 @end
 
 
-@interface _UIContextMenuHeaderView: UIView
+@interface _UIContextMenuHeaderView : UIView
 @property (nonatomic, strong) UIVisualEffectView *bgView;
-@property (nonatomic, strong) UIView *separator;
 @end
 
 
@@ -70,9 +69,10 @@ static void overrideContextMenuHeaderDMTW(_UIContextMenuHeaderView *self, SEL _c
 
 	origContextMenuHeaderDMTW(self, _cmd);
 	self.bgView.hidden = YES;
-	self.separator.hidden = YES;
 
 }
+
+static double overrideHeaderSeparatorHeight(_UIContextMenuHeaderView *self, SEL _cmd) { return 0; }
 
 // ! iOS 15
 
@@ -130,8 +130,10 @@ __attribute__((constructor)) static void init(void) {
 		MSHookMessageEx(kClass(@"_UIContextMenuTitleView"), @selector(separator), (IMP) &overrideTitleSeparator, (IMP *) NULL);
 		MSHookMessageEx(kClass(@"_UIContextMenuReusableSeparatorView"), @selector(didMoveToWindow), (IMP) &overrideContextMenuSeparatorDMTW, (IMP *) &origContextMenuSeparatorDMTW);
 
-		if(kOSVersion >=16.0)
+		if(kOSVersion >= 16.0) {
 			MSHookMessageEx(kClass(@"_UIContextMenuHeaderView"), @selector(didMoveToWindow), (IMP) &overrideContextMenuHeaderDMTW, (IMP *) &origContextMenuHeaderDMTW);
+			MSHookMessageEx(kClass(@"_UIContextMenuHeaderView"), @selector(_separatorHeight), (IMP) &overrideHeaderSeparatorHeight, (IMP *) NULL);
+		}
 	}
 
 	else {
