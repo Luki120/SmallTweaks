@@ -1,9 +1,0 @@
-Package: me.luki.bscimage
-Name: BSCImage
-Version: 0.9.0
-Architecture: iphoneos-arm
-Description: BG Image for BigSurCenter tweak
-Maintainer: Luki
-Author: Luki
-Section: Tweaks
-Depends: mobilesubstrate, preferenceloader, com.mrgcgamer.libgcuniversal
