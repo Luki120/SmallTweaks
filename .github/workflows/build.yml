@@ -36,6 +36,7 @@ jobs:
           path: theos
 
       - name: Checkout theos/sdks
+        if: steps.cache-theos.outputs.cache-hit != 'true'
         uses: actions/checkout@main
         with:
           repository: theos/sdks
