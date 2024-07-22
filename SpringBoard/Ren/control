@@ -1,0 +1,9 @@
+Package: me.luki.ren
+Name: Ren
+Version: 0.9.0
+Architecture: iphoneos-arm
+Description: Display more items on the ShareSheet without scrolling
+Maintainer: Luki
+Author: Luki
+Section: Tweaks
+Depends: mobilesubstrate

@@ -1,0 +1,4 @@
+compile_commands.json
+.DS_Store
+.theos/
+packages/
