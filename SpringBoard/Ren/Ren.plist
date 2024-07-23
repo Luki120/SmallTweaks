@@ -1,1 +1,9 @@
-{ Filter = { Classes = ( "_UIActivityContentCollectionView" ); }; }
+{
+	Filter = {
+		Classes = (
+			"_UIActivityContentCollectionView",
+			"UIAirDropGroupActivityCell",
+			"UIShareGroupActivityCell"
+		);
+	};
+}

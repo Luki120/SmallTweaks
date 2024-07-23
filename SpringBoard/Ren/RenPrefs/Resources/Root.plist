@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Icon size</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>60</real>
+			<key>defaults</key>
+			<string>me.luki.renprefs</string>
+			<key>key</key>
+			<string>iconSize</string>
+			<key>min</key>
+			<real>30</real>
+			<key>max</key>
+			<real>60</real>
+			<key>showValue</key>
+			<true />
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Width</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>78</real>
+			<key>defaults</key>
+			<string>me.luki.renprefs</string>
+			<key>key</key>
+			<string>widthDimension</string>
+			<key>min</key>
+			<real>48</real>
+			<key>max</key>
+			<real>78</real>
+			<key>showValue</key>
+			<true />
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Height</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>118.5</real>
+			<key>defaults</key>
+			<string>me.luki.renprefs</string>
+			<key>key</key>
+			<string>heightDimension</string>
+			<key>min</key>
+			<real>50</real>
+			<key>max</key>
+			<real>118.5</real>
+			<key>showValue</key>
+			<true />
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Section horizontal padding</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>13</real>
+			<key>defaults</key>
+			<string>me.luki.renprefs</string>
+			<key>key</key>
+			<string>sectionHorizontalPadding</string>
+			<key>min</key>
+			<real>0</real>
+			<key>max</key>
+			<real>30</real>
+			<key>showValue</key>
+			<true />
+		</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerAlignment</key>
+				<real>1</real>
+				<key>footerText</key>
+				<string>made by Luki with ❤️</string>
+				<key>isStaticText</key>
+				<true />
+			</dict>
+			<dict>
+				<key>cell</key>
+				<string>PSGroupCell</string>
+				<key>footerAlignment</key>
+				<real>1</real>
+				<key>footerText</key>
+				<string>© 2024 Luki120</string>
+				<key>isStaticText</key>
+				<true />
+			</dict>
+	</array>
+	<key>title</key>
+	<string>Ren</string>
+</dict>
+</plist>
