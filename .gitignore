@@ -2,3 +2,4 @@
 .theos/
 packages/
 compile_commands.json
+.DS_Store
