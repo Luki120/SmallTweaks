@@ -16,3 +16,13 @@
 @interface UIShareGroupActivityCell: UICollectionViewCell
 @property (nonatomic, strong) UIView *imageSlotView;
 @end
+
+
+@interface _UIActivityActionCellTitleLabel : UILabel
+@end
+
+
+@interface UIActivityActionGroupCell: UICollectionViewListCell
+@property (nonatomic, strong) UIView *titleSlotView;
+@property (nonatomic, strong) _UIActivityActionCellTitleLabel *titleLabel;
+@end
