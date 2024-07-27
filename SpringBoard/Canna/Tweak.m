@@ -1,3 +1,5 @@
+/*--- Changes the default lock & charging sounds to the iOS 6 (or custom) ones ---*/
+
 @import AudioToolbox;
 @import CydiaSubstrate;
 #import <rootless.h>

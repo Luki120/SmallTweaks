@@ -1,3 +1,5 @@
+/*--- Swipe up on the dock to get a test notification, no dependencies at all ™ ---*/
+
 @import CydiaSubstrate;
 @import UIKit;
 
