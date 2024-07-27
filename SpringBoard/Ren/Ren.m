@@ -1,6 +1,6 @@
 /*--- Recreates the ShareSheet's main collection view's compositional layout
-	to recreate the horizontal scroll views in order to resize their items so
-	that more of them can fit on the screen without scrolling ---*/
+in order to resize the items of the horizontal scroll views so that more of
+them can fit on the screen without scrolling. Made as a bounty ---*/
 
 #import "Headers/Ren.h"
 
@@ -33,6 +33,7 @@ static id overrideIWFC(_UIActivityContentCollectionView *self, SEL _cmd, CGRect 
 			sizeWithWidthDimension:[NSCollectionLayoutDimension absoluteDimension: widthDimension]
 			heightDimension:[NSCollectionLayoutDimension estimatedDimension: heightDimension]
 		];
+
 		NSCollectionLayoutGroup *group = [NSCollectionLayoutGroup horizontalGroupWithLayoutSize:groupSize subitems: @[item]];
 
 		NSCollectionLayoutSection *section = [NSCollectionLayoutSection sectionWithGroup: group];
@@ -78,18 +79,6 @@ static id overrideShareGroupIWF(UIShareGroupActivityCell *self, SEL _cmd, CGRect
 
 }
 
-static id (*origActivityActionGroupIWF)(UIActivityActionGroupCell *, SEL, CGRect);
-static id overrideActivityActionGroupIWF(UIActivityActionGroupCell *self, SEL _cmd, CGRect frame) {
-
-	id orig = origActivityActionGroupIWF(self, _cmd, frame);
-
-	[self.titleLabel removeFromSuperview];
-	[self.titleSlotView removeFromSuperview];
-
-	return orig;
-
-}
-
 __attribute__((constructor)) static void init(void) {
 
 	loadShit();
@@ -97,7 +86,6 @@ __attribute__((constructor)) static void init(void) {
 	MSHookMessageEx(NSClassFromString(@"UIAirDropGroupActivityCell"), @selector(layoutSubviews), (IMP) &overrideAirDropLS, (IMP *) &origAirDropLS);
 	MSHookMessageEx(NSClassFromString(@"UIAirDropGroupActivityCell"), @selector(initWithFrame:), (IMP) &overrideAirDropIWF, (IMP *) &origAirDropIWF);
 	MSHookMessageEx(NSClassFromString(@"UIShareGroupActivityCell"), @selector(initWithFrame:), (IMP) &overrideShareGroupIWF, (IMP *) &origShareGroupIWF);
-	MSHookMessageEx(NSClassFromString(@"UIActivityActionGroupCell"), @selector(initWithFrame:), (IMP) &overrideActivityActionGroupIWF, (IMP *) &origActivityActionGroupIWF);
 	MSHookMessageEx(NSClassFromString(@"_UIActivityContentCollectionView"), @selector(initWithFrame:collectionViewLayout:), (IMP) &overrideIWFC, (IMP *) &origIWFC);
 
 }
