@@ -1,0 +1,9 @@
+Package: me.luki.fucksignalexpiry
+Name: FuckSignalExpiry
+Version: 0.9.0
+Architecture: iphoneos-arm
+Description: Definitely an awesome MobileSubstrate tweak
+Maintainer: Luki
+Author: Luki
+Section: Tweaks
+Depends: mobilesubstrate
