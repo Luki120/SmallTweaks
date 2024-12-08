@@ -2,10 +2,12 @@ name: Makefile CI
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-    
+    branches:
+      - main
+    paths:
+      - Apps/**
+      - SpringBoard/**
+
 jobs:
   build:
     runs-on: macos-14
