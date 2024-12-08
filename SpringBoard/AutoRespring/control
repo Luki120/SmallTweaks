@@ -1,0 +1,9 @@
+Package: me.luki.autorespring
+Name: AutoRespring
+Version: 0.9.0
+Architecture: iphoneos-arm
+Description: An awesome MobileSubstrate tweak!
+Maintainer: luki120
+Author: luki120
+Section: Tweaks
+Depends: mobilesubstrate, preferenceloader
